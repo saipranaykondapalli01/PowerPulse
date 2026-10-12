@@ -1,0 +1,53 @@
+server:
+  port: ${PORT:8080}
+  error:
+    include-stacktrace: never
+    include-message: never
+
+spring:
+  application:
+    name: powerpulse
+  profiles:
+    default: dev
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017}
+      database: ${MONGODB_DATABASE:powerpulse}
+      auto-index-creation: true
+  jackson:
+    default-property-inclusion: always
+    serialization:
+      write-dates-as-timestamps: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+powerpulse:
+  security:
+    jwt:
+      # REQUIRED outside dev/test. Must be at least 32 bytes.
+      secret: ${POWERPULSE_JWT_SECRET:}
+      expiry-minutes: ${POWERPULSE_JWT_EXPIRY_MINUTES:480}
+    cookie-secure: ${POWERPULSE_COOKIE_SECURE:true}
+  cors:
+    allowed-origins: ${CORS_ORIGIN:http://localhost:5173}
+  simulation:
+    enabled: ${SIMULATION_ENABLED:true}
+    interval-ms: ${SIMULATION_INTERVAL_MS:10000}
+  retention:
+    reading-days: ${READING_RETENTION_DAYS:90}
+  jobs:
+    stale-check-ms: 30000
+    maintenance-check-ms: 300000

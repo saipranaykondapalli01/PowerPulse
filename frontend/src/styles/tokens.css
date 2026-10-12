@@ -1,0 +1,89 @@
+/*
+ * PowerPulse design tokens. Single source for color, type, spacing and motion.
+ * Colors are space-separated RGB channels so Tailwind can apply alpha (see tailwind.config.ts).
+ */
+:root {
+  /* Brand (landing, light editorial) */
+  --paper: 242 240 233;      /* #F2F0E9 */
+  --ink: 21 23 19;           /* #151713 */
+  --muted: 104 106 97;       /* #686A61 */
+  --accent: 201 242 74;      /* #C9F24A */
+  /* Semantic status — tuned for AA text contrast on the light surfaces. Never color-only. */
+  --warning: 145 92 19;     /* #915C13 */
+  --critical: 188 57 51;    /* #BC3933 */
+  --healthy: 35 117 81;     /* #237551 */
+  --offline: 103 105 97;    /* #676961 */
+  --healthy-bg: 229 242 232; /* #E5F2E8 */
+  --warning-bg: 247 235 210; /* #F7EBD2 */
+  --critical-bg: 247 228 224;/* #F7E4E0 */
+  --offline-bg: 232 231 224; /* #E8E7E0 */
+  /* Accent text/marks on light surfaces (lime itself is a fill, never text). */
+  --accent-ink: 77 100 16;   /* #4D6410 */
+  /* Supporting blue (informational, e.g. SIMULATED markers); darkened from #7897B8 for text contrast on light. */
+  --steel: 79 108 141;       /* #4F6C8D */
+
+  /* Application surfaces (light, shared with the landing page's warm neutrals) */
+  --canvas: 242 240 233;     /* #F2F0E9 page */
+  --panel: 248 247 242;      /* #F8F7F2 surface */
+  --raised: 234 232 224;     /* #EAE8E0 surface-muted */
+  --line: 215 213 204;       /* #D7D5CC border */
+  --line-strong: 184 183 173;/* #B8B7AD */
+  --fg: 23 24 20;            /* #171814 text */
+  --fg-muted: 102 103 95;    /* #66675F secondary text */
+  --fg-subtle: 133 134 125;  /* #85867D large/decorative only */
+
+  /* Chart series */
+  --chart-temp: 87 127 176;  /* #577FB0 */
+  --chart-load: 120 152 36;  /* #789824 — darker than #9ABF37 for line contrast on light */
+  --chart-secondary: 139 122 184; /* #8B7AB8 */
+  --chart-neutral: 137 139 131;   /* #898B83 */
+
+  /* Typography
+   * Display: General Sans 600 — size-led hierarchy, solid leading, negative tracking.
+   * Body: Inter 400/500. Technical labels: JetBrains Mono 500, uppercase, positive tracking. */
+  --font-display: 'General Sans', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --text-display-xl: clamp(2.6rem, 8.2vw, 8.5rem);
+  --text-display-lg: clamp(2.35rem, 6.2vw, 7rem);
+  --text-display-md: clamp(2rem, 5.4vw, 5.25rem);
+  --text-display-sm: clamp(1.6rem, 3.2vw, 3rem);
+  --text-metric: clamp(2.5rem, 6vw, 5.5rem);
+  --text-lead: clamp(1.125rem, 1.6vw, 1.5rem);
+  --text-body-lg: clamp(1rem, 1.15vw, 1.125rem);
+  --tracking-display: -0.035em;
+  --tracking-tight: -0.02em;
+  --tracking-label: 0.08em;
+  --leading-display: 0.92;
+  --leading-body: 1.55;
+
+  /* Layout */
+  --layout-content: 1600px;
+  --layout-prose: 38rem;
+  --gutter: clamp(1rem, 3vw, 2.5rem);
+  --section-y: clamp(6rem, 14vw, 13rem);
+  --header-h: 4.5rem;
+
+  /* Motion — transform/opacity only; nothing loops. Mirrored in pages/landing/motion/tokens.ts */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 700ms;
+  --dur-reveal: 900ms;
+  --stagger-line: 80ms;
+
+  /* Focus */
+  --focus-ring: 0 0 0 2px rgb(var(--accent)), 0 0 0 4px rgb(var(--ink));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --dur-reveal: 0ms;
+    --stagger-line: 0ms;
+  }
+}

@@ -1,0 +1,22 @@
+# Dependencies & builds
+node_modules/
+frontend/dist/
+backend/target/
+*.log
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Claude worktrees
+.claude/worktrees/
+tsconfig.tsbuildinfo

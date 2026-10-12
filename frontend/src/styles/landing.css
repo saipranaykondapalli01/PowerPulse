@@ -1,0 +1,192 @@
+/*
+ * Landing-only styles. Everything is scoped under .pp-landing so nothing leaks into the app
+ * shell when this lazily-loaded stylesheet stays in the document after navigation.
+ */
+
+.pp-landing {
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
+  font-family: var(--font-body);
+  line-height: var(--leading-body);
+}
+
+.pp-landing section[id],
+.pp-landing footer[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+.pp-landing .pp-section {
+  padding-block: var(--section-y);
+}
+
+/* Display type: size-led hierarchy, solid leading, tight tracking. */
+.pp-landing .pp-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+
+.pp-landing .pp-lead {
+  font-size: var(--text-lead);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+/* Mono instrument labels */
+.pp-landing .pp-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+/* Masked line for RevealLines. Bottom padding keeps descenders out of the mask edge. */
+.pp-landing .pp-line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+/* SVG annotation text, sized in viewBox units */
+.pp-landing .pp-svg-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.pp-landing .pp-svg-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+/* Calls to action */
+.pp-landing .pp-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 3.25rem;
+  white-space: nowrap;
+  padding: 0.875rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  border: 1px solid rgb(var(--ink));
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+.pp-landing .pp-cta--solid {
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+}
+.pp-landing .pp-cta--solid:hover {
+  background: rgb(var(--accent));
+  color: rgb(var(--ink));
+}
+.pp-landing .pp-cta--outline {
+  color: rgb(var(--ink));
+}
+.pp-landing .pp-cta--outline:hover {
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+}
+.pp-landing .pp-cta--inverse {
+  border-color: rgb(var(--paper));
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
+}
+.pp-landing .pp-cta--inverse:hover {
+  background: rgb(var(--accent));
+  border-color: rgb(var(--accent));
+}
+.pp-landing .pp-cta__arrow {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.pp-landing .pp-cta:hover .pp-cta__arrow,
+.pp-landing .pp-cta:focus-visible .pp-cta__arrow {
+  transform: translateX(0.375rem);
+}
+
+/* Text link with an arrow reveal; the text itself never moves out of view. */
+.pp-landing .pp-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-block: 0.25rem;
+}
+.pp-landing .pp-arrow-link__icon {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.pp-landing .pp-arrow-link:hover .pp-arrow-link__icon,
+.pp-landing .pp-arrow-link:focus-visible .pp-arrow-link__icon {
+  transform: translate(0.2rem, -0.2rem);
+}
+
+/* Capability rows: arrow slides in, row tint; title and description stay visible. */
+.pp-landing .pp-row-arrow {
+  opacity: 0.25;
+  transform: translateX(-0.75rem);
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+.pp-landing .pp-row:hover .pp-row-arrow,
+.pp-landing .pp-row:focus-visible .pp-row-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.pp-landing .pp-row__title {
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+@media (hover: hover) and (min-width: 768px) {
+  .pp-landing .pp-row:hover .pp-row__title {
+    transform: translateX(1.25rem);
+  }
+}
+
+/* Focus ring that reads on both paper and ink surfaces */
+.pp-landing a:focus-visible,
+.pp-landing button:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgb(var(--ink));
+}
+
+.pp-landing .pp-skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+  padding: 0.75rem 1rem;
+}
+.pp-landing .pp-skip:focus {
+  top: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .pp-landing .pp-svg-sub--hide-sm {
+    display: none;
+  }
+}

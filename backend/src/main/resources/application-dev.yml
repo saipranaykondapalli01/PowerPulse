@@ -1,0 +1,13 @@
+# Development profile. Seeds demo users, a demo device, 20 transformers and 24h of SIMULATED readings.
+# The secret below is a documented, development-only value. Never use it in production.
+powerpulse:
+  security:
+    jwt:
+      secret: ${POWERPULSE_JWT_SECRET:dev-only-insecure-jwt-secret-change-me-0123456789}
+    cookie-secure: false
+  seed:
+    enabled: true
+
+logging:
+  level:
+    com.powerpulse: INFO

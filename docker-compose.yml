@@ -1,0 +1,41 @@
+# Local full-stack environment: MongoDB + backend API + frontend web app.
+# NOTE: not executed in the original development environment (Docker unavailable there); see README.
+services:
+  mongo:
+    image: mongo:8.0
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ping:1}).ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: powerpulse
+      POWERPULSE_JWT_SECRET: ${POWERPULSE_JWT_SECRET:-dev-only-insecure-jwt-secret-change-me-0123456789}
+      POWERPULSE_COOKIE_SECURE: "false"
+      CORS_ORIGIN: http://localhost:8081
+      SIMULATION_ENABLED: "true"
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
+
+volumes:
+  mongo-data:

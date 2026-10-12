@@ -1,0 +1,16 @@
+# Test profile: uses a local MongoDB test database (Docker/Testcontainers not available in this environment).
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_TEST_URI:mongodb://localhost:27017}
+      database: powerpulse_test
+
+powerpulse:
+  security:
+    jwt:
+      secret: test-only-jwt-secret-0123456789-abcdefghijklmnop
+    cookie-secure: false
+  simulation:
+    enabled: false
+  seed:
+    enabled: false
